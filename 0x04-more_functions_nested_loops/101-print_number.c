@@ -7,30 +7,18 @@
 
 void print_number(int n)
 {
-	int last, main,  rev = 0;
-	char flag = 'n';
+	unsigned int num = n;
 
-	main = n;
-	while (main)
-	{
-		last = main % 10;
-		rev *= 10;
-		rev += last;
-		main = main / 10;
-	}
-	if (rev < 0)
-	{
-		flag = 'y';
-		rev *= -1;
-	}
-	if (flag == 'y')
+	/*first check if is negative*/
+	if (n < 0)
 	{
 		_putchar('-');
+		num = -num;
 	}
-	while (rev)
-	{
-		last = rev % 10;
-		_putchar(last + '0');
-		rev = rev / 10;
-	}
+
+	/*print the first few digits*/
+	if ((num / 10) > 0)
+		print_number(num / 10);
+	/*print the last digits*/
+	_putchar((num % 10) + 48);
 }
