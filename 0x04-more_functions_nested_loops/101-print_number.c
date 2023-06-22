@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * print_number -  function that prints an integer.
  *
@@ -8,18 +7,30 @@
 
 void print_number(int n)
 {
-	unsigned int num = n;
+	int last, main,  rev = 0;
+	char flag = 'n';
 
-	/*first check if is negative*/
-	if (n < 0)
+	main = n;
+	while (main)
+	{
+		last = main % 10;
+		rev *= 10;
+		rev += last;
+		main = main / 10;
+	}
+	if (rev < 0)
+	{
+		flag = 'y';
+		rev *= -1;
+	}
+	if (flag == 'y')
 	{
 		_putchar('-');
-		num = -num;
 	}
-
-	/*print the first few digits*/
-	if ((num / 10) > 0)
-		print_number(num / 10);
-	/*print the last digits*/
-	_putchar((num % 10) + 48);
+	while (rev)
+	{
+		last = rev % 10;
+		_putchar(last + '0');
+		rev = rev / 10;
+	}
 }
