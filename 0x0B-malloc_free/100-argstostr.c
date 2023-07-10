@@ -1,39 +1,41 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 /**
- * *_realloc - reallocate memory size function
- * @ptr: pointer to address of old memory location
- * @old_size: unsigned int type of old memory size
- * @new_size: unsigned int type for new memory size
- * Return:  return pointer to array
+ * argstostr - main entry
+ * @ac: int input
+ * @av: double pointer array
+ * Return: 0
  */
-
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+char *argstostr(int ac, char **av)
 {
-	char *s;
+	int i, n, r = 0, l = 0;
+	char *str;
 
-	if (new_size > old_size)
-	{
-		s = malloc(new_size);
-		free(ptr);
-		return (s);
-	}
-	if (new_size == old_size)
-	{
-		return (ptr);
-	}
-	if (ptr == NULL)
-	{
-		s = malloc(new_size);
-		free(ptr);
-		return (s);
-	}
-	if (new_size == 0 && ptr != NULL)
-	{
-		free(ptr);
+	if (ac == 0 || av == NULL)
 		return (NULL);
+
+	for (i = 0; i < ac; i++)
+	{
+		for (n = 0; av[i][n]; n++)
+			l++;
 	}
-	return (ptr);
+	l += ac;
+
+	str = malloc(sizeof(char) * l + 1);
+	if (str == NULL)
+		return (NULL);
+	for (i = 0; i < ac; i++)
+	{
+	for (n = 0; av[i][n]; n++)
+	{
+		str[r] = av[i][n];
+		r++;
+	}
+	if (str[r] == '\0')
+	{
+		str[r++] = '\n';
+	}
+	}
+	return (str);
 }
+
