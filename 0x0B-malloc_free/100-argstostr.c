@@ -1,43 +1,33 @@
-#include <stdlib.h>
 #include "main.h"
-
 /**
-* **strtow - function that splits a string into words.
-* @str : pointer
-* Return: Char
-*/
-
-char **strtow(char *str)
+ * _realloc - reallocates a memory block using malloc and free
+ * @ptr: pointer to reallocate memory
+ * @old_size: size in bytes of allocated memory
+ * @new_size: newsize of memory block in bytes
+ * Return: void pointer to new allocation of memory
+ */
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	char **d;
-	int i;
-	int j = 0;
-	int con = 0;
+	char *p;
+	unsigned int i;
 
-	if (str == NULL)
-		return (NULL);
-
-	for (i = 0 ; str[i] != '\0' ; i++)
+	if (ptr == NULL)
 	{
-		if (str[i] != 32)
-			con++;
+		p = malloc(new_size);
+		return (p);
 	}
-
-	d = malloc(sizeof(char) * con);
-
-	if (d == NULL)
-		return (NULL);
-
-	for (i = 0 ; str[i] != '\0' ; i++)
+	if (new_size == 0)
 	{
-		if (str[i] != 32)
-		{
-			*d[j] = str[i];
-			j++;
-		}
-		else
-		{
-		}
+		free(ptr);
+		return (NULL);
 	}
-	return (d);
+	if (old_size == new_size)
+		return (ptr);
+	p = malloc(new_size);
+	if (p == NULL)
+		return (NULL);
+	for (i = 0; i < old_size && i < new_size; i++)
+		p[i] = ((char *)ptr)[i];
+	free(ptr);
+	return (p);
 }
