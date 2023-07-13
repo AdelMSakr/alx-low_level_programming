@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 int find_len(char *str);
 char *create_xarray(int size);
@@ -185,14 +187,15 @@ void add_nums(char *final_prod, char *next_prod, int next_len)
  *              contains non-digits, the function exits with a status of 98.
  * Return: Always 0.
  */
-int main(int argc, char *argv[])
+int main(int argc, char const *argv[])
 {
 	char *final_prod, *next_prod;
 	int size, index, digit, zeroes = 0;
+	(void)argc;
 
 	if (argc != 3)
 	{
-		printf("Error\n");
+		_puts("Error ");
 		exit(98);
 	}
 
